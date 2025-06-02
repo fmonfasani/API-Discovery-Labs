@@ -1,0 +1,35 @@
+{
+    "name": "api-discovery-lab",
+    "version": "1.0.0",
+    "description": "Herramientas para descubrir y analizar APIs en aplicaciones web",
+    "main": "scripts/network-analyzer.js",
+    "scripts": {
+        "start": "node scripts/network-analyzer.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "setup": "./setup.sh",
+        "scan": "python scripts/endpoint-scanner.py",
+        "analyze": "node scripts/network-analyzer.js"
+    },
+    "keywords": [
+        "api",
+        "security",
+        "pentesting",
+        "web-analysis",
+        "network-analysis"
+    ],
+    "author": "Tu nombre",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.4.0",
+        "cheerio": "^1.0.0-rc.12",
+        "commander": "^11.0.0",
+        "colors": "^1.4.0",
+        "fs-extra": "^11.1.0",
+        "puppeteer": "^20.0.0",
+        "ws": "^8.13.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.40.0",
+        "prettier": "^2.8.8"
+    }
+}

@@ -1,0 +1,38 @@
+# Librerías para análisis de red y HTTP
+requests>=2.28.0
+urllib3>=1.26.0
+httpx>=0.24.0
+
+# Para parsing y análisis de datos
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+xmltodict>=0.13.0
+
+# Para trabajar con JSON y datos estructurados
+jsonschema>=4.17.0
+pyyaml>=6.0
+
+# Para análisis de subdominios y DNS
+dnspython>=2.3.0
+python-whois>=0.7.0
+
+# Para análisis de certificados SSL
+cryptography>=40.0.0
+pyopenssl>=23.0.0
+
+# Para colores en terminal y mejor UX
+colorama>=0.4.6
+rich>=13.0.0
+click>=8.1.0
+
+# Para concurrencia y threading
+asyncio-throttle>=1.0.0
+aiohttp>=3.8.0
+
+# Para análisis de headers y user agents
+fake-useragent>=1.4.0
+user-agents>=2.2.0
+
+# Para exportar resultados
+openpyxl>=3.0.0
+pandas>=1.5.0

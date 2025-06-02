@@ -1,0 +1,46 @@
+# Logs y archivos temporales
+*.log
+logs/
+temp/
+*.tmp
+
+# Archivos de configuración con datos sensibles
+config/*.env
+config/secrets.json
+*.key
+*.pem
+
+# Resultados de scans (pueden contener información sensible)
+results/*.json
+results/*.xml
+results/screenshots/
+!results/README.md
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Datos de prueba
+test-data/
