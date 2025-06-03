@@ -10,6 +10,12 @@ pip install -r requirements.txt
 
 # Ejecutar primer análisis
 npm run analyze
+
+# 1. Probar con una API real
+node scripts/network-analyzer.js --url https://jsonplaceholder.typicode.com --time 30 --verbose
+
+# 2. Buscar subdominios de GitHub
+python3 scripts/subdomain-finder.py --domain github.com --output github-analysis.json
 ```
 
 ## 📁 Estructura

@@ -27,10 +27,12 @@ program
     .option('-t, --time <seconds>', 'Tiempo de análisis en segundos', '30')
     .option('-o, --output <file>', 'Archivo de salida para resultados')
     .option('-v, --verbose', 'Modo verbose para debugging')
-    .option('--headless', 'Ejecutar en modo headless (sin interfaz gráfica)', true)
+    .option('--headless', 'forzar headless')
+    .option('--executable <path>', 'Ruta al binario de Chrome/Chromium')
     .parse();
 
 const options = program.opts();
+
 
 /**
  * Clase principal para el análisis de red
@@ -41,7 +43,8 @@ class NetworkAnalyzer {
         this.config = {
             timeout: parseInt(config.time) * 1000 || 30000,
             verbose: config.verbose || false,
-            headless: config.headless !== false,
+            headless: config.headless ?? true, //default True,
+            executablePath: config.executable || process.env.CHROME_BIN,
             ...config
         };
         
@@ -107,18 +110,28 @@ class NetworkAnalyzer {
             console.log('🌐 Lanzando navegador...'.gray);
         }
 
-        return await puppeteer.launch({
-            headless: this.config.headless,
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--no-first-run',
-                '--no-zygote',
-                '--disable-gpu'
+        try { return await puppeteer.launch({
+              headless: this.config.headless ? 'new' : false,
+              executablePath: this.config.executablePath,
+              args: [
+                  '--no-sandbox',
+                  '--disable-setuid-sandbox',
+                  '--disable-dev-shm-usage',
+                  '--disable-accelerated-2d-canvas',
+                  '--no-first-run',
+                  '--no-zygote',
+                  '--disable-gpu'
             ]
         });
+        } catch (err) {
+            console.error('\n❌ Puppeteer no pudo arrancar Chrome.'.red);
+            if (this.config.verbose) console.error(err.stack);
+            console.error('👉  Sugerencias:');
+            console.error('   • Ejecuta: npx @puppeteer/browsers install chrome@stable');
+            console.error('   • O pasa --executable /ruta/al/chrome');
+            console.error('   • Ver docs: https://pptr.dev/troubleshooting\n');
+            throw err;   // vuelve a lanzar para que main() lo capture
+        }
     }
 
     /**
