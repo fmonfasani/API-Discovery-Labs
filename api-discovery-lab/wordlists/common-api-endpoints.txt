@@ -1,0 +1,62 @@
+# Endpoints comunes de API para fuzzing
+# Usar con el endpoint scanner
+
+# Autenticación
+api/auth
+api/login
+api/token
+api/oauth
+auth/login
+auth/token
+login
+token
+
+# Usuarios
+api/users
+api/user
+users
+user
+api/profile
+profile
+api/account
+account
+
+# Datos
+api/data
+api/posts
+api/comments
+api/items
+data
+posts
+comments
+items
+
+# Configuración
+api/config
+api/settings
+config
+settings
+api/admin
+admin
+
+# Versionado
+api/v1
+api/v2
+api/v3
+v1
+v2
+v3
+
+# Formatos
+api/json
+api/xml
+json
+xml
+
+# Servicios
+api/service
+api/services
+service
+services
+api/endpoint
+endpoint

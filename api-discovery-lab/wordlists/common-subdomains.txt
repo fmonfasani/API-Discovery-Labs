@@ -1,0 +1,26 @@
+# Subdominios comunes que pueden contener APIs
+api
+developer
+dev
+developers
+api-dev
+api-test
+test
+staging
+stage
+beta
+v1
+v2
+v3
+rest
+graphql
+gateway
+service
+services
+data
+admin
+internal
+private
+public
+docs
+documentation

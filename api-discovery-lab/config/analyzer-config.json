@@ -15,4 +15,20 @@
     ],
     "analysisSettings": {
         "maxConcurrentRequests": 10,
-        "
+        "simulateUserInteraction": true,
+        "captureScreenshots": false,
+        "followRedirects": true,
+        "ignoreCertificateErrors": true
+    },
+    "outputFormats": {
+        "json": true,
+        "csv": true,
+        "html": false
+    },
+    "securityChecks": {
+        "checkHttps": true,
+        "analyzeHeaders": true,
+        "detectAuth": true,
+        "flagSensitiveData": true
+    }
+}
