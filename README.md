@@ -4,10 +4,6 @@ Un laboratorio completo para aprender a descubrir y analizar APIs en aplicacione
 
 ## 🚀 Inicio Rápido
 
-```bash
-# Ejecutar script de configuración
-./setup.sh
-
 # Instalar dependencias
 npm install
 pip install -r requirements.txt
