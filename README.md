@@ -124,7 +124,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## 🔹 Author
 
-Developed by \[Your Name].
+Developed by \fmonfasani.
 
 ---
 
@@ -135,6 +135,3 @@ Developed by \[Your Name].
 * Add SSL/TLS certificate analysis.
 * Add automated load testing.
 
----
-
-Ready to audit your backend like a pro? 🚀
