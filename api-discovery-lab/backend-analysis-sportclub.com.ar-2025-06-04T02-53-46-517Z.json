@@ -1,0 +1,1193 @@
+{
+  "serverInfo": {
+    "server": "No identificado",
+    "poweredBy": "No identificado",
+    "statusCode": 301,
+    "contentType": "text/html",
+    "responseTime": 105
+  },
+  "vulnerabilities": [
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api/v1",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api/v2",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api/v3",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/rest",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/graphql",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/health",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/ready",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/live",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/ping",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/heartbeat",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/metrics",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/prometheus",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/actuator/health",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/actuator/metrics",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/stats",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/performance",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/monitoring",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/dashboard",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/load-balancer-status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/cluster-status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/swagger",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/docs",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api-docs",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/openapi.json",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/schema",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/version",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/build-info",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/info",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/about",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/service-discovery",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/registry",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/gateway",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/proxy",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/circuit-breaker",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/rate-limit-status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/db-status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/database/health",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/cache/stats",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/redis/info",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/mongodb/status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/postgres/status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/admin",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/admin/api",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/debug",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/trace",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/profiler",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/.env",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/config",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/settings",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api/legales",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api/banner/findByComponent/11",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    }
+  ],
+  "apiEndpoints": [
+    {
+      "path": "/api",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/api/v1",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/api/v2",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/api/v3",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 33,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/rest",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 50,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/graphql",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 32,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/health",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/ready",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 26,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/live",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 27,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/ping",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/heartbeat",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/metrics",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 27,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/prometheus",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/actuator/health",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/actuator/metrics",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/stats",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/performance",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 27,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/monitoring",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/dashboard",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/load-balancer-status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/cluster-status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/swagger",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/docs",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/api-docs",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/openapi.json",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/schema",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 26,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/version",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/build-info",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 39,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/info",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 27,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/about",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/service-discovery",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/registry",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/gateway",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/proxy",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/circuit-breaker",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 27,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/rate-limit-status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 34,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/db-status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 32,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/database/health",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/cache/stats",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/redis/info",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/mongodb/status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/postgres/status",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/admin",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/admin/api",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 44,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/debug",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 28,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/trace",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 27,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/profiler",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/.env",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 61,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/config",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 32,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/settings",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 25,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/api/legales",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/api/banner/findByComponent/11",
+      "status": 301,
+      "contentType": "text/html",
+      "size": 166,
+      "responseTime": 26,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    }
+  ],
+  "securityHeaders": {
+    "Strict-Transport-Security": "❌ Ausente",
+    "Content-Security-Policy": "❌ Ausente",
+    "X-Frame-Options": "❌ Ausente",
+    "X-Content-Type-Options": "❌ Ausente",
+    "Referrer-Policy": "❌ Ausente",
+    "Permissions-Policy": "❌ Ausente"
+  },
+  "technologies": [],
+  "performance": {
+    "responseTimeStats": {
+      "average": 30.16666666666667,
+      "min": 27.666666666666668,
+      "max": 36,
+      "endpoints": {
+        "/health": {
+          "averageResponseTime": 36,
+          "measurements": [
+            37,
+            43,
+            28
+          ],
+          "consistency": 17.12337223046938
+        },
+        "/status": {
+          "averageResponseTime": 28.666666666666668,
+          "measurements": [
+            29,
+            31,
+            26
+          ],
+          "consistency": 7.167923259266253
+        },
+        "/metrics": {
+          "averageResponseTime": 28.666666666666668,
+          "measurements": [
+            31,
+            25,
+            30
+          ],
+          "consistency": 9.155823109316058
+        },
+        "/api": {
+          "averageResponseTime": 27.666666666666668,
+          "measurements": [
+            30,
+            28,
+            25
+          ],
+          "consistency": 7.4270048228541885
+        },
+        "/api/v1": {
+          "averageResponseTime": 30.666666666666668,
+          "measurements": [
+            31,
+            31,
+            30
+          ],
+          "consistency": 1.5371886547533642
+        },
+        "/": {
+          "averageResponseTime": 29.333333333333332,
+          "measurements": [
+            26,
+            31,
+            31
+          ],
+          "consistency": 8.035304331665314
+        }
+      }
+    },
+    "throughputMetrics": {},
+    "databasePerformance": {},
+    "cachePerformance": {},
+    "loadBalancerHealth": {}
+  },
+  "architecture": {
+    "type": "microservices",
+    "apiVersioning": {
+      "strategies": {
+        "urlPath": [
+          "1",
+          "2",
+          "3"
+        ],
+        "queryParam": [],
+        "header": [],
+        "subdomain": []
+      },
+      "maturity": "intermediate"
+    },
+    "rateLimiting": {},
+    "circuitBreaker": {},
+    "scalingIndicators": {},
+    "deploymentInfo": {},
+    "indicators": {
+      "microservices": 9,
+      "monolith": 1,
+      "serverless": 0
+    },
+    "microservicesPatterns": {
+      "serviceDiscovery": true,
+      "apiGateway": true,
+      "circuitBreaker": true,
+      "configServer": true,
+      "messageQueue": true
+    },
+    "microservicesMaturity": "advanced",
+    "loadBalancing": {
+      "responseTimeVariation": {
+        "average": 30.8,
+        "range": 8,
+        "coefficientOfVariation": 9.499181063849218
+      }
+    }
+  },
+  "recommendations": [],
+  "riskLevel": "LOW",
+  "performanceScore": 96.98333333333333,
+  "architectureScore": 60
+}

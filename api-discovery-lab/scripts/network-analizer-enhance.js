@@ -6,7 +6,7 @@
  * Análisis completo: Seguridad + Rendimiento + Arquitectura + Escalabilidad
  * Uso: node enhanced-analyzer.js <URL>
  */
-
+const { discoverDynamicEndpoints } = require("./dynamic-endpoint-discoverer");
 const https = require("https");
 const http = require("http");
 const fs = require("fs").promises;
@@ -118,6 +118,17 @@ class Enhanced_Backend_Analyzer {
       "/settings",
     ];
   }
+  async discoverDynamicApiEndpoints() {
+    const dynamicEndpoints = await discoverDynamicEndpoints(this.target.origin);
+
+    dynamicEndpoints.forEach((endpointUrl) => {
+      const path = new URL(endpointUrl).pathname;
+      this.commonApiPaths.push(path);
+    });
+
+    // Elimina duplicados
+    this.commonApiPaths = [...new Set(this.commonApiPaths)];
+  }
 
   async analyze(targetUrl) {
     console.log("🚀 ENHANCED BACKEND ANALYZER".red.bold);
@@ -128,6 +139,7 @@ class Enhanced_Backend_Analyzer {
       this.hostSlug = this.target.hostname;
       console.log(`🎯 Analizando: ${this.target.origin}`.cyan);
       console.log(`🕐 Iniciando análisis completo...\n`.yellow);
+      await this.discoverDynamicApiEndpoints();
 
       // Análisis original (seguridad)
       await this.analyzeMainServer();
