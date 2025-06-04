@@ -1,578 +1,715 @@
 #!/usr/bin/env node
 
 /**
- * Network Analyzer - API Discovery Lab
- * 
- * Este script funciona como un interceptor de tráfico de red que puede
- * analizar patrones de comunicación en aplicaciones web.
- * 
- * Métodos de análisis:
- * 1. Análisis estático de código fuente
- * 2. Interceptación de peticiones usando Puppeteer
- * 3. Análisis de patrones comunes de API
- * 4. Generación de reportes estructurados
+ * Network API Analyzer - Backend Vulnerability Scanner
+ *
+ * Analizador de seguridad enfocado en vulnerabilidades de backend, APIs y servidores
+ * Uso: node security-analyzer.js <URL>
  */
 
-const puppeteer = require('puppeteer');
-const fs = require('fs-extra');
-const path = require('path');
-const { program } = require('commander');
-const colors = require('colors');
+const https = require("https");
+const http = require("http");
+const fs = require("fs").promises;
+const path = require("path");
+const { URL } = require("url");
+const colors = require("colors");
+const { url } = require("inspector");
 
-// Configuración del programa de línea de comandos
-program
-    .version('1.0.0')
-    .description('Analizador de tráfico de red para descubrimiento de APIs')
-    .option('-u, --url <url>', 'URL objetivo para análizar')
-    .option('-t, --time <seconds>', 'Tiempo de análisis en segundos', '30')
-    .option('-o, --output <file>', 'Archivo de salida para resultados')
-    .option('-v, --verbose', 'Modo verbose para debugging')
-    .option('--headless', 'forzar headless')
-    .option('--executable <path>', 'Ruta al binario de Chrome/Chromium')
-    .parse();
+class Network_Analyzer {
+  constructor() {
+    this.target = null;
+    this.results = {
+      serverInfo: {},
+      vulnerabilities: [],
+      apiEndpoints: [],
+      securityHeaders: {},
+      technologies: [],
+      recommendations: [],
+      riskLevel: "unknown",
+    };
+    this.commonApiPaths = [
+      "/api",
+      "/api/v1",
+      "/api/v2",
+      "/rest",
+      "/graphql",
+      "/admin",
+      "/admin/api",
+      "/wp-json",
+      "/wp-admin",
+      "/api/users",
+      "/api/auth",
+      "/api/login",
+      "/api/config",
+      "/swagger",
+      "/docs",
+      "/api-docs",
+      "/openapi.json",
+      "/.env",
+      "/config",
+      "/status",
+      "/health",
+      "/debug",
+    ];
+  }
 
-const options = program.opts();
+  async analyze(targetUrl) {
+    console.log("🔍 SECURITY API ANALYZER".red.bold);
+    console.log("═".repeat(60).gray);
 
-
-/**
- * Clase principal para el análisis de red
- * Esta clase encapsula toda la lógica de interceptación y análisis
- */
-class NetworkAnalyzer {
-    constructor(config = {}) {
-        this.config = {
-            timeout: parseInt(config.time) * 1000 || 30000,
-            verbose: config.verbose || false,
-            headless: config.headless ?? true, //default True,
-            executablePath: config.executable || process.env.CHROME_BIN,
-            ...config
-        };
-        
-        // Aquí almacenaremos todas las peticiones interceptadas
-        this.interceptedRequests = [];
-        this.apiPatterns = [];
-        this.analysisResults = {
-            totalRequests: 0,
-            apiEndpoints: [],
-            technologies: new Set(),
-            authMethods: new Set(),
-            dataFormats: new Set(),
-            httpMethods: new Set()
-        };
-    }
-
-    /**
-     * Método principal que orquesta todo el análisis
-     */
-    async analyze(targetUrl) {
-        console.log('🚀 Iniciando análisis de red...'.blue.bold);
-        console.log(`📍 Objetivo: ${targetUrl}`.cyan);
-        console.log(`⏱️  Duración: ${this.config.timeout / 1000} segundos\n`.cyan);
-
-        const browser = await this.launchBrowser();
-        const page = await this.setupPage(browser);
-
-        try {
-            // Configurar interceptación de peticiones
-            await this.setupNetworkInterception(page);
-            
-            // Navegar a la página objetivo
-            await page.goto(targetUrl, { 
-                waitUntil: 'networkidle2',
-                timeout: 60000 
-            });
-
-            // Simular interacción con la página para generar tráfico
-            await this.simulateUserInteraction(page);
-
-            // Esperar el tiempo configurado para capturar más tráfico
-            console.log('📡 Capturando tráfico de red...'.yellow);
-            await this.waitAndCapture();
-
-            // Analizar las peticiones capturadas
-            await this.analyzeInterceptedRequests();
-
-            // Generar reporte
-            const report = await this.generateReport(targetUrl);
-            
-            return report;
-
-        } finally {
-            await browser.close();
-        }
-    }
-
-    /**
-     * Configura el navegador con las opciones necesarias
-     */
-    async launchBrowser() {
-        if (this.config.verbose) {
-            console.log('🌐 Lanzando navegador...'.gray);
-        }
-
-        try { return await puppeteer.launch({
-              headless: this.config.headless ? 'new' : false,
-              executablePath: this.config.executablePath,
-              args: [
-                  '--no-sandbox',
-                  '--disable-setuid-sandbox',
-                  '--disable-dev-shm-usage',
-                  '--disable-accelerated-2d-canvas',
-                  '--no-first-run',
-                  '--no-zygote',
-                  '--disable-gpu'
-            ]
-        });
-        } catch (err) {
-            console.error('\n❌ Puppeteer no pudo arrancar Chrome.'.red);
-            if (this.config.verbose) console.error(err.stack);
-            console.error('👉  Sugerencias:');
-            console.error('   • Ejecuta: npx @puppeteer/browsers install chrome@stable');
-            console.error('   • O pasa --executable /ruta/al/chrome');
-            console.error('   • Ver docs: https://pptr.dev/troubleshooting\n');
-            throw err;   // vuelve a lanzar para que main() lo capture
-        }
-    }
-
-    /**
-     * Configura la página con user agent y otras opciones
-     */
-    async setupPage(browser) {
-        const page = await browser.newPage();
-        
-        // Configurar user agent realista
-        await page.setUserAgent(
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        );
-
-        // Configurar viewport para simular dispositivo real
-        await page.setViewport({ width: 1366, height: 768 });
-
-        return page;
-    }
-
-    /**
-     * Esta es la función más importante: configura la interceptación de red
-     * Aquí es donde "escuchamos" todas las peticiones que hace la aplicación
-     */
-    async setupNetworkInterception(page) {
-        await page.setRequestInterception(true);
-
-        // Interceptar todas las peticiones
-        page.on('request', (request) => {
-            // Permitir que la petición continúe normalmente
-            request.continue();
-            
-            // Pero también la registramos para análisis
-            this.recordRequest(request);
-        });
-
-        // Interceptar todas las respuestas
-        page.on('response', (response) => {
-            this.recordResponse(response);
-        });
-
-        if (this.config.verbose) {
-            console.log('🕸️  Interceptación de red configurada'.gray);
-        }
-    }
-
-    /**
-     * Registra cada petición para análisis posterior
-     */
-    recordRequest(request) {
-        const requestData = {
-            url: request.url(),
-            method: request.method(),
-            headers: request.headers(),
-            postData: request.postData(),
-            timestamp: Date.now(),
-            type: 'request'
-        };
-
-        this.interceptedRequests.push(requestData);
-        
-        if (this.config.verbose) {
-            console.log(`📤 ${request.method()} ${request.url()}`.gray);
-        }
-    }
-
-    /**
-     * Registra cada respuesta para análisis posterior
-     */
-    recordResponse(response) {
-        const responseData = {
-            url: response.url(),
-            status: response.status(),
-            headers: response.headers(),
-            timestamp: Date.now(),
-            type: 'response'
-        };
-
-        this.interceptedRequests.push(responseData);
-        
-        if (this.config.verbose) {
-            console.log(`📥 ${response.status()} ${response.url()}`.gray);
-        }
-    }
-
-    /**
-     * Simula interacción del usuario para provocar más peticiones de API
-     * Esto es crucial porque muchas APIs solo se activan con interacción
-     */
-    async simulateUserInteraction(page) {
-        console.log('🤖 Simulando interacción de usuario...'.yellow);
-
-        try {
-            // Hacer scroll para cargar contenido lazy-loaded
-            await page.evaluate(() => {
-                window.scrollTo(0, document.body.scrollHeight / 2);
-            });
-            await page.waitForTimeout(2000);
-
-            // Buscar y hacer clic en botones comunes
-            const commonSelectors = [
-                'button[type="submit"]',
-                '.btn',
-                '.button',
-                '[role="button"]',
-                'a[href*="api"]',
-                'input[type="search"]'
-            ];
-
-            for (const selector of commonSelectors) {
-                try {
-                    await page.click(selector);
-                    await page.waitForTimeout(1000);
-                    if (this.config.verbose) {
-                        console.log(`✅ Clic en: ${selector}`.gray);
-                    }
-                } catch (e) {
-                    // Ignorar errores de elementos no encontrados
-                }
-            }
-
-            // Simular búsquedas si hay campos de búsqueda
-            try {
-                const searchInput = await page.$('input[type="search"], input[placeholder*="search"], .search-input');
-                if (searchInput) {
-                    await searchInput.type('test');
-                    await page.keyboard.press('Enter');
-                    await page.waitForTimeout(2000);
-                    console.log('🔍 Búsqueda simulada realizada'.gray);
-                }
-            } catch (e) {
-                // Ignorar si no hay campo de búsqueda
-            }
-
-        } catch (error) {
-            if (this.config.verbose) {
-                console.log(`⚠️  Error en simulación: ${error.message}`.yellow);
-            }
-        }
-    }
-
-    /**
-     * Espera y continúa capturando tráfico
-     */
-    async waitAndCapture() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                console.log('✅ Captura de tráfico completada\n'.green);
-                resolve();
-            }, this.config.timeout);
-        });
-    }
-
-    /**
-     * Analiza todas las peticiones interceptadas para identificar APIs
-     * Este es el cerebro del sistema - aquí identificamos patrones
-     */
-    async analyzeInterceptedRequests() {
-        console.log('🧠 Analizando peticiones interceptadas...'.blue);
-
-        // Filtrar solo peticiones que parecen ser APIs
-        const apiRequests = this.interceptedRequests.filter(req => 
-            req.type === 'request' && this.looksLikeAPI(req.url)
-        );
-
-        console.log(`📊 Total de peticiones: ${this.interceptedRequests.length}`);
-        console.log(`🎯 Peticiones de API detectadas: ${apiRequests.length}\n`);
-
-        this.analysisResults.totalRequests = this.interceptedRequests.length;
-
-        // Analizar cada petición de API
-        for (const request of apiRequests) {
-            this.analyzeAPIRequest(request);
-        }
-
-        // Mostrar resultados preliminares
-        this.displayPreliminaryResults();
-    }
-
-    /**
-     * Determina si una URL parece ser una API basándose en patrones comunes
-     */
-    looksLikeAPI(url) {
-        const apiPatterns = [
-            /\/api\//i,
-            /\/v\d+\//,
-            /\.json($|\?)/,
-            /\/rest\//i,
-            /\/graphql/i,
-            /\/endpoint/i,
-            /\/service/i,
-            /\/data\//i,
-            /\/ajax\//i
-        ];
-
-        return apiPatterns.some(pattern => pattern.test(url));
-    }
-
-    /**
-     * Analiza una petición específica de API
-     */
-    analyzeAPIRequest(request) {
-        const endpoint = {
-            url: request.url,
-            method: request.method,
-            headers: request.headers,
-            timestamp: request.timestamp,
-            analysis: {}
-        };
-
-        // Detectar tecnologías basándose en headers
-        this.detectTechnologies(request.headers);
-        
-        // Detectar métodos de autenticación
-        this.detectAuthMethods(request.headers);
-        
-        // Detectar formatos de datos
-        this.detectDataFormats(request.headers);
-        
-        // Registrar método HTTP
-        this.analysisResults.httpMethods.add(request.method);
-
-        // Analizar estructura de la URL
-        endpoint.analysis = this.analyzeURLStructure(request.url);
-
-        this.analysisResults.apiEndpoints.push(endpoint);
-    }
-
-    /**
-     * Detecta tecnologías basándose en headers HTTP
-     */
-    detectTechnologies(headers) {
-        const techIndicators = {
-            'x-powered-by': (value) => this.analysisResults.technologies.add(`X-Powered-By: ${value}`),
-            'server': (value) => this.analysisResults.technologies.add(`Server: ${value}`),
-            'x-aspnet-version': (value) => this.analysisResults.technologies.add('ASP.NET'),
-            'x-generator': (value) => this.analysisResults.technologies.add(`Generator: ${value}`)
-        };
-
-        Object.entries(headers).forEach(([key, value]) => {
-            const lowerKey = key.toLowerCase();
-            if (techIndicators[lowerKey]) {
-                techIndicators[lowerKey](value);
-            }
-        });
-    }
-
-    /**
-     * Detecta métodos de autenticación
-     */
-    detectAuthMethods(headers) {
-        const authIndicators = {
-            'authorization': (value) => {
-                if (value.startsWith('Bearer')) {
-                    this.analysisResults.authMethods.add('Bearer Token');
-                } else if (value.startsWith('Basic')) {
-                    this.analysisResults.authMethods.add('Basic Auth');
-                } else {
-                    this.analysisResults.authMethods.add('Custom Authorization');
-                }
-            },
-            'x-api-key': () => this.analysisResults.authMethods.add('API Key'),
-            'cookie': () => this.analysisResults.authMethods.add('Session Cookie')
-        };
-
-        Object.entries(headers).forEach(([key, value]) => {
-            const lowerKey = key.toLowerCase();
-            if (authIndicators[lowerKey]) {
-                authIndicators[lowerKey](value);
-            }
-        });
-    }
-
-    /**
-     * Detecta formatos de datos
-     */
-    detectDataFormats(headers) {
-        const contentType = headers['content-type'] || '';
-        
-        if (contentType.includes('application/json')) {
-            this.analysisResults.dataFormats.add('JSON');
-        } else if (contentType.includes('application/xml') || contentType.includes('text/xml')) {
-            this.analysisResults.dataFormats.add('XML');
-        } else if (contentType.includes('application/x-www-form-urlencoded')) {
-            this.analysisResults.dataFormats.add('Form Data');
-        } else if (contentType.includes('multipart/form-data')) {
-            this.analysisResults.dataFormats.add('Multipart Form');
-        }
-    }
-
-    /**
-     * Analiza la estructura de la URL para entender patrones de API
-     */
-    analyzeURLStructure(url) {
-        const analysis = {
-            hasVersioning: /\/v\d+\//.test(url),
-            restfulPattern: /\/(users|posts|comments|items|data)\/\d+/.test(url),
-            hasAuthentication: /\/(auth|login|token)/.test(url),
-            isPublicAPI: url.includes('/api/public/'),
-            hasParameters: url.includes('?')
-        };
-
-        return analysis;
-    }
-
-    /**
-     * Muestra resultados preliminares en la consola
-     */
-    displayPreliminaryResults() {
-        console.log('📋 RESULTADOS PRELIMINARES'.green.bold);
-        console.log('═'.repeat(50).gray);
-        
-        console.log(`🎯 APIs detectadas: ${this.analysisResults.apiEndpoints.length}`.cyan);
-        console.log(`🔧 Tecnologías: ${Array.from(this.analysisResults.technologies).join(', ')}`.cyan);
-        console.log(`🔐 Autenticación: ${Array.from(this.analysisResults.authMethods).join(', ')}`.cyan);
-        console.log(`📄 Formatos: ${Array.from(this.analysisResults.dataFormats).join(', ')}`.cyan);
-        console.log(`🌐 Métodos HTTP: ${Array.from(this.analysisResults.httpMethods).join(', ')}`.cyan);
-        
-        console.log('\n📍 ENDPOINTS DETECTADOS:'.yellow.bold);
-        this.analysisResults.apiEndpoints.slice(0, 10).forEach((endpoint, index) => {
-            console.log(`${index + 1}. ${endpoint.method.toUpperCase()} ${endpoint.url}`.white);
-        });
-        
-        if (this.analysisResults.apiEndpoints.length > 10) {
-            console.log(`... y ${this.analysisResults.apiEndpoints.length - 10} más\n`.gray);
-        }
-    }
-
-    /**
-     * Genera un reporte completo del análisis
-     */
-    async generateReport(targetUrl) {
-        const report = {
-            metadata: {
-                target: targetUrl,
-                timestamp: new Date().toISOString(),
-                analysisVersion: '1.0.0',
-                duration: this.config.timeout / 1000
-            },
-            summary: {
-                totalRequests: this.analysisResults.totalRequests,
-                apiEndpointsFound: this.analysisResults.apiEndpoints.length,
-                technologiesDetected: Array.from(this.analysisResults.technologies),
-                authMethodsDetected: Array.from(this.analysisResults.authMethods),
-                dataFormatsDetected: Array.from(this.analysisResults.dataFormats),
-                httpMethodsUsed: Array.from(this.analysisResults.httpMethods)
-            },
-            endpoints: this.analysisResults.apiEndpoints,
-            recommendations: this.generateRecommendations()
-        };
-
-        // Guardar reporte si se especificó archivo de salida
-        if (options.output) {
-            await this.saveReport(report, options.output);
-        }
-
-        return report;
-    }
-
-    /**
-     * Genera recomendaciones basadas en el análisis
-     */
-    generateRecommendations() {
-        const recommendations = [];
-
-        if (this.analysisResults.authMethods.size === 0) {
-            recommendations.push({
-                type: 'security',
-                message: 'No se detectaron métodos de autenticación. Verificar si las APIs están protegidas.',
-                priority: 'high'
-            });
-        }
-
-        if (this.analysisResults.apiEndpoints.length > 20) {
-            recommendations.push({
-                type: 'performance',
-                message: 'Se detectaron muchas llamadas a API. Considerar optimización o caching.',
-                priority: 'medium'
-            });
-        }
-
-        if (Array.from(this.analysisResults.technologies).some(tech => tech.includes('Server: Apache'))) {
-            recommendations.push({
-                type: 'security',
-                message: 'Servidor Apache detectado. Verificar versión y configuración de seguridad.',
-                priority: 'medium'
-            });
-        }
-
-        return recommendations;
-    }
-
-    /**
-     * Guarda el reporte en un archivo
-     */
-    async saveReport(report, filename) {
-        const resultsDir = path.join(process.cwd(), 'results');
-        await fs.ensureDir(resultsDir);
-        
-        const filepath = path.join(resultsDir, filename);
-        await fs.writeJson(filepath, report, { spaces: 2 });
-        
-        console.log(`💾 Reporte guardado en: ${filepath}`.green);
-    }
-}
-
-/**
- * Función principal que se ejecuta cuando se llama al script
- */
-async function main() {
     try {
-        if (!options.url) {
-            console.error('❌ Error: URL objetivo requerida. Usa --url <URL>'.red);
-            process.exit(1);
-        }
+      this.target = new URL(targetUrl);
+      this.hostSlug = this.target.hostname;
+      console.log(`🎯 Analizando: ${this.target.origin}`.cyan);
+      console.log(`🕐 Iniciando análisis de seguridad...\n`.yellow);
 
-        const analyzer = new NetworkAnalyzer(options);
-        const report = await analyzer.analyze(options.url);
+      // Fase 1: Análisis del servidor principal
+      await this.analyzeMainServer();
 
-        console.log('\n🎉 ANÁLISIS COMPLETADO'.green.bold);
-        console.log('═'.repeat(50).gray);
-        console.log(`📊 Total de endpoints API encontrados: ${report.summary.apiEndpointsFound}`.cyan);
-        console.log(`🔧 Tecnologías detectadas: ${report.summary.technologiesDetected.length}`.cyan);
-        console.log(`⚠️  Recomendaciones de seguridad: ${report.recommendations.length}`.yellow);
+      // Fase 2: Descubrimiento de endpoints de API
+      await this.discoverApiEndpoints();
 
-        if (!options.output) {
-            console.log('\n💡 Tip: Usa --output reporte.json para guardar los resultados'.blue);
-        }
+      // Fase 3: Análisis de vulnerabilidades
+      await this.analyzeVulnerabilities();
 
+      // Fase 4: Análisis de headers de seguridad
+      await this.analyzeSecurityHeaders();
+
+      // Fase 5: Generar reporte de seguridad
+      await this.generateSecurityReport();
     } catch (error) {
-        console.error(`❌ Error durante el análisis: ${error.message}`.red);
-        if (options.verbose) {
-            console.error(error.stack);
-        }
-        process.exit(1);
+      console.error(`❌ Error crítico: ${error.message}`.red);
+      throw error;
     }
+  }
+
+  async analyzeMainServer() {
+    console.log("🌐 Analizando servidor principal...".blue);
+
+    try {
+      const response = await this.makeRequest("/");
+
+      // Extraer información del servidor
+      this.results.serverInfo = {
+        server: response.headers.server || "No identificado",
+        poweredBy: response.headers["x-powered-by"] || "No identificado",
+        statusCode: response.statusCode,
+        contentType: response.headers["content-type"] || "No especificado",
+        responseTime: response.responseTime,
+      };
+
+      // Detectar tecnologías
+      this.detectTechnologies(response.headers, response.body);
+
+      console.log(`✅ Servidor: ${this.results.serverInfo.server}`.green);
+      console.log(`⚡ Tecnología: ${this.results.serverInfo.poweredBy}`.green);
+    } catch (error) {
+      console.log(`⚠️  Error conectando al servidor: ${error.message}`.yellow);
+      this.results.vulnerabilities.push({
+        type: "connection",
+        severity: "medium",
+        description:
+          "Error de conexión podría indicar configuración incorrecta",
+        details: error.message,
+      });
+    }
+  }
+
+  async discoverApiEndpoints() {
+    console.log("\n🔎 Descubriendo endpoints de API...".blue);
+
+    const foundEndpoints = [];
+
+    for (const path of this.commonApiPaths) {
+      try {
+        const response = await this.makeRequest(path);
+
+        if (response.statusCode !== 404) {
+          const endpoint = {
+            path: path,
+            status: response.statusCode,
+            server: response.headers.server,
+            contentType: response.headers["content-type"],
+            size: response.body ? response.body.length : 0,
+            authentication: this.checkAuthentication(response.headers),
+            exposedData: this.analyzeExposedData(
+              response.body,
+              response.headers
+            ),
+          };
+
+          foundEndpoints.push(endpoint);
+          console.log(`📍 Encontrado: ${path} [${response.statusCode}]`.green);
+
+          // Buscar vulnerabilidades específicas del endpoint
+          this.analyzeEndpointVulnerabilities(endpoint);
+        }
+      } catch (error) {
+        // Ignorar errores de conexión para paths específicos
+      }
+    }
+
+    this.results.apiEndpoints = foundEndpoints;
+    console.log(`📊 Total endpoints encontrados: ${foundEndpoints.length}`);
+  }
+
+  async analyzeVulnerabilities() {
+    console.log("\n🚨 Analizando vulnerabilidades de seguridad...".red);
+
+    // Verificar vulnerabilidades del servidor
+    this.checkServerVulnerabilities();
+
+    // Verificar configuraciones inseguras
+    this.checkInsecureConfigurations();
+
+    // Verificar exposición de información sensible
+    await this.checkInformationDisclosure();
+
+    // Verificar métodos HTTP peligrosos
+    await this.checkDangerousHttpMethods();
+
+    console.log(
+      `🛡️  Vulnerabilidades detectadas: ${this.results.vulnerabilities.length}`
+    );
+  }
+
+  async analyzeSecurityHeaders() {
+    console.log("\n🔒 Analizando headers de seguridad...".blue);
+
+    try {
+      const response = await this.makeRequest("/");
+      const securityHeaders = {
+        "strict-transport-security":
+          response.headers["strict-transport-security"],
+        "content-security-policy": response.headers["content-security-policy"],
+        "x-frame-options": response.headers["x-frame-options"],
+        "x-content-type-options": response.headers["x-content-type-options"],
+        "x-xss-protection": response.headers["x-xss-protection"],
+        "referrer-policy": response.headers["referrer-policy"],
+      };
+
+      this.results.securityHeaders = securityHeaders;
+      this.analyzeMissingSecurityHeaders(securityHeaders);
+    } catch (error) {
+      console.log(`⚠️  Error analizando headers: ${error.message}`.yellow);
+    }
+  }
+
+  checkServerVulnerabilities() {
+    const server = this.results.serverInfo.server.toLowerCase();
+    const poweredBy = this.results.serverInfo.poweredBy.toLowerCase();
+
+    // Verificar versiones obsoletas
+    const vulnerableVersions = {
+      apache: ["2.2", "2.0"],
+      nginx: ["1.0", "1.2"],
+      php: ["5.", "7.0", "7.1"],
+      express: ["3.", "4.0", "4.1"],
+    };
+
+    Object.entries(vulnerableVersions).forEach(([tech, versions]) => {
+      if (server.includes(tech) || poweredBy.includes(tech)) {
+        versions.forEach((version) => {
+          if (server.includes(version) || poweredBy.includes(version)) {
+            this.results.vulnerabilities.push({
+              type: "outdated_software",
+              severity: "high",
+              description: `Versión obsoleta de ${tech} detectada`,
+              details: `${tech} ${version} tiene vulnerabilidades conocidas`,
+              recommendation: `Actualizar ${tech} a la última versión estable`,
+            });
+          }
+        });
+      }
+    });
+
+    // Verificar información excesiva del servidor
+    if (
+      this.results.serverInfo.server !== "No identificado" &&
+      this.results.serverInfo.server.includes("/")
+    ) {
+      this.results.vulnerabilities.push({
+        type: "information_disclosure",
+        severity: "low",
+        description: "Servidor expone información de versión",
+        details: `Server header: ${this.results.serverInfo.server}`,
+        recommendation:
+          "Configurar servidor para ocultar información detallada",
+      });
+    }
+  }
+
+  checkInsecureConfigurations() {
+    // Verificar si usa HTTPS
+    if (this.target.protocol === "http:") {
+      this.results.vulnerabilities.push({
+        type: "insecure_transport",
+        severity: "high",
+        description: "Sitio no usa HTTPS",
+        details: "Comunicación sin cifrar expone datos sensibles",
+        recommendation: "Implementar HTTPS con certificado SSL/TLS válido",
+      });
+    }
+  }
+
+  async checkInformationDisclosure() {
+    const sensitivePaths = [
+      "/.env",
+      "/config.php",
+      "/wp-config.php",
+      "/settings.py",
+      "/package.json",
+      "/composer.json",
+      "/README.md",
+      "/phpinfo.php",
+      "/info.php",
+      "/test.php",
+    ];
+
+    for (const path of sensitivePaths) {
+      try {
+        const response = await this.makeRequest(path);
+
+        if (response.statusCode === 200) {
+          this.results.vulnerabilities.push({
+            type: "information_disclosure",
+            severity: "high",
+            description: `Archivo sensible expuesto: ${path}`,
+            details: `Archivo accesible públicamente con código ${response.statusCode}`,
+            recommendation: `Bloquear acceso público a ${path}`,
+          });
+        }
+      } catch (error) {
+        // Ignorar errores de conexión
+      }
+    }
+  }
+
+  async checkDangerousHttpMethods() {
+    const dangerousMethods = ["PUT", "DELETE", "PATCH", "TRACE", "OPTIONS"];
+
+    for (const method of dangerousMethods) {
+      try {
+        const response = await this.makeRequest("/", method);
+
+        if (response.statusCode !== 405 && response.statusCode !== 501) {
+          this.results.vulnerabilities.push({
+            type: "dangerous_http_methods",
+            severity: "medium",
+            description: `Método HTTP ${method} habilitado`,
+            details: `Servidor responde a ${method} con código ${response.statusCode}`,
+            recommendation: `Deshabilitar método ${method} si no es necesario`,
+          });
+        }
+      } catch (error) {
+        // Ignorar errores de conexión
+      }
+    }
+  }
+
+  analyzeMissingSecurityHeaders(headers) {
+    const requiredHeaders = {
+      "strict-transport-security": {
+        severity: "high",
+        description:
+          "Header HSTS faltante - sitio vulnerable a downgrade attacks",
+      },
+      "content-security-policy": {
+        severity: "medium",
+        description: "Header CSP faltante - sitio vulnerable a XSS",
+      },
+      "x-frame-options": {
+        severity: "medium",
+        description:
+          "Header X-Frame-Options faltante - sitio vulnerable a clickjacking",
+      },
+      "x-content-type-options": {
+        severity: "low",
+        description:
+          "Header X-Content-Type-Options faltante - sitio vulnerable a MIME sniffing",
+      },
+    };
+
+    Object.entries(requiredHeaders).forEach(([header, config]) => {
+      if (!headers[header]) {
+        this.results.vulnerabilities.push({
+          type: "missing_security_header",
+          severity: config.severity,
+          description: config.description,
+          details: `Header '${header}' no encontrado`,
+          recommendation: `Implementar header ${header}`,
+        });
+      }
+    });
+  }
+
+  analyzeEndpointVulnerabilities(endpoint) {
+    // Verificar endpoints de administración sin autenticación
+    if (
+      endpoint.path.includes("admin") &&
+      endpoint.status === 200 &&
+      !endpoint.authentication
+    ) {
+      this.results.vulnerabilities.push({
+        type: "admin_exposure",
+        severity: "critical",
+        description: `Panel de administración expuesto: ${endpoint.path}`,
+        details: "Panel administrativo accesible sin autenticación",
+        recommendation: "Implementar autenticación robusta para panel admin",
+      });
+    }
+
+    // Verificar APIs sin autenticación
+    if (
+      endpoint.path.includes("api") &&
+      endpoint.status === 200 &&
+      !endpoint.authentication
+    ) {
+      this.results.vulnerabilities.push({
+        type: "api_exposure",
+        severity: "high",
+        description: `API expuesta sin autenticación: ${endpoint.path}`,
+        details: "Endpoint de API accesible públicamente",
+        recommendation: "Implementar autenticación para APIs",
+      });
+    }
+
+    // Verificar exposición de datos sensibles
+    if (endpoint.exposedData.length > 0) {
+      this.results.vulnerabilities.push({
+        type: "data_exposure",
+        severity: "high",
+        description: `Datos sensibles expuestos en ${endpoint.path}`,
+        details: `Datos encontrados: ${endpoint.exposedData.join(", ")}`,
+        recommendation: "Filtrar datos sensibles en respuestas de API",
+      });
+    }
+  }
+
+  checkAuthentication(headers) {
+    return headers["www-authenticate"] ||
+      headers["authorization"] ||
+      headers["set-cookie"]
+      ? true
+      : false;
+  }
+
+  analyzeExposedData(body, headers) {
+    const exposedData = [];
+
+    if (!body) return exposedData;
+
+    const bodyStr = body.toString().toLowerCase();
+
+    // Buscar patrones de datos sensibles
+    const sensitivePatterns = {
+      passwords: /password["\s]*[:=]["\s]*[^",\s}]+/gi,
+      api_keys: /api[_-]?key["\s]*[:=]["\s]*[^",\s}]+/gi,
+      tokens: /token["\s]*[:=]["\s]*[^",\s}]+/gi,
+      secrets: /secret["\s]*[:=]["\s]*[^",\s}]+/gi,
+      database: /database|db_|mysql|postgres/gi,
+      emails: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi,
+    };
+
+    Object.entries(sensitivePatterns).forEach(([type, pattern]) => {
+      if (pattern.test(bodyStr)) {
+        exposedData.push(type);
+      }
+    });
+
+    return exposedData;
+  }
+
+  detectTechnologies(headers, body) {
+    const technologies = [];
+
+    // Detectar por headers
+    const headerTech = {
+      "x-powered-by": headers["x-powered-by"],
+      server: headers.server,
+      "x-aspnet-version": headers["x-aspnet-version"] ? "ASP.NET" : null,
+      "x-generator": headers["x-generator"],
+    };
+
+    Object.values(headerTech).forEach((tech) => {
+      if (tech) technologies.push(tech);
+    });
+
+    // Detectar por contenido
+    if (body) {
+      const bodyStr = body.toString();
+      const contentTech = {
+        WordPress: /wp-content|wp-includes/i.test(bodyStr),
+        Drupal: /drupal/i.test(bodyStr),
+        React: /react/i.test(bodyStr),
+        Angular: /angular/i.test(bodyStr),
+        jQuery: /jquery/i.test(bodyStr),
+      };
+
+      Object.entries(contentTech).forEach(([tech, detected]) => {
+        if (detected) technologies.push(tech);
+      });
+    }
+
+    this.results.technologies = [...new Set(technologies)];
+  }
+
+  calculateRiskLevel() {
+    const criticalVulns = this.results.vulnerabilities.filter(
+      (v) => v.severity === "critical"
+    ).length;
+    const highVulns = this.results.vulnerabilities.filter(
+      (v) => v.severity === "high"
+    ).length;
+    const mediumVulns = this.results.vulnerabilities.filter(
+      (v) => v.severity === "medium"
+    ).length;
+
+    if (criticalVulns > 0) return "CRITICAL";
+    if (highVulns >= 3) return "HIGH";
+    if (highVulns > 0 || mediumVulns >= 5) return "MEDIUM";
+    if (mediumVulns > 0) return "LOW";
+    return "MINIMAL";
+  }
+
+  generateRecommendations() {
+    const recommendations = [
+      "🔒 Implementar HTTPS con certificados válidos",
+      "🛡️  Configurar headers de seguridad (HSTS, CSP, X-Frame-Options)",
+      "🔐 Implementar autenticación robusta para APIs y paneles admin",
+      "🚫 Ocultar información del servidor en headers HTTP",
+      "📋 Realizar auditorías de seguridad regulares",
+      "🔄 Mantener software y dependencias actualizadas",
+      "📊 Implementar logging y monitoreo de seguridad",
+      "🚪 Configurar firewall y limitación de rate limiting",
+    ];
+
+    // Recomendaciones específicas basadas en vulnerabilidades
+    const specificRecommendations = this.results.vulnerabilities
+      .map((vuln) => vuln.recommendation)
+      .filter((rec, index, arr) => arr.indexOf(rec) === index);
+
+    return [...recommendations, ...specificRecommendations];
+  }
+
+  async generateSecurityReport() {
+    this.results.riskLevel = this.calculateRiskLevel();
+    this.results.recommendations = this.generateRecommendations();
+
+    console.log("\n" + "═".repeat(60).gray);
+    console.log("📋 REPORTE DE SEGURIDAD".red.bold);
+    console.log("═".repeat(60).gray);
+
+    // Resumen ejecutivo
+    console.log("\n🎯 RESUMEN EJECUTIVO".cyan.bold);
+    console.log(`🌐 Objetivo: ${this.target.hostname.replace(/^www\./i, "")}`);
+    console.log(
+      `⚠️  Nivel de Riesgo: ${this.getRiskColor(this.results.riskLevel)}`
+    );
+    console.log(`🔍 Vulnerabilidades: ${this.results.vulnerabilities.length}`);
+    console.log(`📍 Endpoints: ${this.results.apiEndpoints.length}`);
+    console.log(
+      `🔧 Tecnologías: ${this.results.technologies.join(", ") || "No identificadas"}`
+    );
+
+    // Vulnerabilidades por severidad
+    console.log("\n🚨 VULNERABILIDADES POR SEVERIDAD".red.bold);
+    const severityCount = this.countBySeverity();
+    console.log(`🔴 Críticas: ${severityCount.critical}`);
+    console.log(`🟠 Altas: ${severityCount.high}`);
+    console.log(`🟡 Medias: ${severityCount.medium}`);
+    console.log(`🟢 Bajas: ${severityCount.low}`);
+
+    // Top vulnerabilidades
+    console.log("\n⚠️  TOP VULNERABILIDADES".yellow.bold);
+    this.results.vulnerabilities
+      .sort(
+        (a, b) =>
+          this.getSeverityScore(b.severity) - this.getSeverityScore(a.severity)
+      )
+      .slice(0, 10)
+      .forEach((vuln, index) => {
+        console.log(
+          `${index + 1}. [${vuln.severity.toUpperCase()}] ${vuln.description}`
+        );
+        console.log(`   💡 ${vuln.recommendation}`);
+      });
+
+    // Endpoints encontrados
+    if (this.results.apiEndpoints.length > 0) {
+      console.log("\n📍 ENDPOINTS CRÍTICOS".blue.bold);
+      this.results.apiEndpoints
+        .filter((ep) => ep.path.includes("admin") || ep.path.includes("api"))
+        .slice(0, 5)
+        .forEach((endpoint) => {
+          console.log(`🔗 ${endpoint.path} [${endpoint.status}]`);
+          console.log(`   🔐 Auth: ${endpoint.authentication ? "Sí" : "No"}`);
+          if (endpoint.exposedData.length > 0) {
+            console.log(
+              `   ⚠️  Datos expuestos: ${endpoint.exposedData.join(", ")}`
+            );
+          }
+        });
+    }
+
+    // Recomendaciones principales
+    console.log("\n💡 RECOMENDACIONES PRIORITARIAS".green.bold);
+    this.results.recommendations.slice(0, 8).forEach((rec, index) => {
+      console.log(`${index + 1}. ${rec}`);
+    });
+
+    // Guardar reporte completo
+    await this.saveDetailedReport();
+
+    console.log("\n" + "═".repeat(60).gray);
+    console.log(
+      `✅ Informe guardado en report/${this.target.hostname.replace(/^www\./i, "")}.json`
+        .green
+    );
+  }
+
+  countBySeverity() {
+    return {
+      critical: this.results.vulnerabilities.filter(
+        (v) => v.severity === "critical"
+      ).length,
+      high: this.results.vulnerabilities.filter((v) => v.severity === "high")
+        .length,
+      medium: this.results.vulnerabilities.filter(
+        (v) => v.severity === "medium"
+      ).length,
+      low: this.results.vulnerabilities.filter((v) => v.severity === "low")
+        .length,
+    };
+  }
+
+  getSeverityScore(severity) {
+    const scores = { critical: 4, high: 3, medium: 2, low: 1 };
+    return scores[severity] || 0;
+  }
+
+  getRiskColor(level) {
+    const colors = {
+      CRITICAL: level.red.bold,
+      HIGH: level.red,
+      MEDIUM: level.yellow,
+      LOW: level.green,
+      MINIMAL: level.green.bold,
+    };
+    return colors[level] || level;
+  }
+
+  async saveDetailedReport() {
+    const report = {
+      metadata: {
+        target: this.target.origin,
+        timestamp: new Date().toISOString(),
+        analyzer: "Security API Analyzer v2.0",
+        riskLevel: this.results.riskLevel,
+      },
+      executive_summary: {
+        total_vulnerabilities: this.results.vulnerabilities.length,
+        risk_level: this.results.riskLevel,
+        endpoints_found: this.results.apiEndpoints.length,
+        technologies_detected: this.results.technologies,
+      },
+      server_information: this.results.serverInfo,
+      security_headers: this.results.securityHeaders,
+      vulnerabilities: this.results.vulnerabilities,
+      api_endpoints: this.results.apiEndpoints,
+      recommendations: this.results.recommendations,
+    };
+
+    try {
+      const filePath = path.join(
+        "report",
+        `${this.target.hostname.replace(/^www\./i, "")}.json`
+      );
+      await fs.mkdir("report", { recursive: true });
+      await fs.writeFile(filePath, JSON.stringify(report, null, 2));
+    } catch (error) {
+      console.log(`⚠️  Error guardando reporte: ${error.message}`.yellow);
+    }
+  }
+
+  async makeRequest(path, method = "GET") {
+    return new Promise((resolve, reject) => {
+      const url = new URL(path, this.target.origin);
+      const client = url.protocol === "https:" ? https : http;
+
+      const startTime = Date.now();
+
+      const options = {
+        hostname: url.hostname,
+        port: url.port,
+        path: url.pathname + url.search,
+        method: method,
+        timeout: 10000,
+        headers: {
+          "User-Agent": "Security-Analyzer/2.0",
+          Accept: "*/*",
+          Connection: "close",
+        },
+      };
+
+      const req = client.request(options, (res) => {
+        let body = "";
+
+        res.on("data", (chunk) => {
+          body += chunk;
+        });
+
+        res.on("end", () => {
+          resolve({
+            statusCode: res.statusCode,
+            headers: res.headers,
+            body: body,
+            responseTime: Date.now() - startTime,
+          });
+        });
+      });
+
+      req.on("error", reject);
+      req.on("timeout", () => {
+        req.destroy();
+        reject(new Error("Request timeout"));
+      });
+
+      req.end();
+    });
+  }
 }
 
-// Ejecutar solo si este archivo se llama directamente
+// Función principal
+async function main() {
+  const args = process.argv.slice(2);
+
+  if (args.length === 0) {
+    console.log("Uso: node security-analyzer.js <URL>".yellow);
+    console.log("Ejemplo: node security-analyzer.js https://ejemplo.com".gray);
+    process.exit(1);
+  }
+
+  let targetUrl = args[0];
+
+  // Agregar https:// si no tiene protocolo
+  if (!targetUrl.startsWith("http://") && !targetUrl.startsWith("https://")) {
+    targetUrl = "https://" + targetUrl;
+  }
+
+  const analyzer = new Network_Analyzer();
+
+  try {
+    await analyzer.analyze(targetUrl);
+  } catch (error) {
+    console.error(`❌ Error fatal: ${error.message}`.red);
+    process.exit(1);
+  }
+}
+
+// Ejecutar si es llamado directamente
 if (require.main === module) {
-    main().catch(console.error);
+  main().catch(console.error);
 }
 
-// Exportar la clase para uso en otros módulos
-module.exports = { NetworkAnalyzer };
+module.exports = { Network_Analyzer };

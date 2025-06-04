@@ -1,0 +1,262 @@
+{
+  "metadata": {
+    "target": "https://www.sportclub.com.ar",
+    "timestamp": "2025-06-03T16:08:57.454Z",
+    "analyzer": "Security API Analyzer v2.0",
+    "riskLevel": "MEDIUM"
+  },
+  "executive_summary": {
+    "total_vulnerabilities": 8,
+    "risk_level": "MEDIUM",
+    "endpoints_found": 20,
+    "technologies_detected": [
+      "AmazonS3"
+    ]
+  },
+  "server_information": {
+    "server": "AmazonS3",
+    "poweredBy": "No identificado",
+    "statusCode": 200,
+    "contentType": "text/html",
+    "responseTime": 109
+  },
+  "security_headers": {},
+  "vulnerabilities": [
+    {
+      "type": "missing_security_header",
+      "severity": "high",
+      "description": "Header HSTS faltante - sitio vulnerable a downgrade attacks",
+      "details": "Header 'strict-transport-security' no encontrado",
+      "recommendation": "Implementar header strict-transport-security"
+    },
+    {
+      "type": "dangerous_http_methods",
+      "severity": "medium",
+      "description": "Método HTTP PUT habilitado",
+      "details": "Servidor responde a PUT con código 200",
+      "recommendation": "Deshabilitar método PUT si no es necesario"
+    },
+    {
+      "type": "dangerous_http_methods",
+      "severity": "medium",
+      "description": "Método HTTP DELETE habilitado",
+      "details": "Servidor responde a DELETE con código 200",
+      "recommendation": "Deshabilitar método DELETE si no es necesario"
+    },
+    {
+      "type": "dangerous_http_methods",
+      "severity": "medium",
+      "description": "Método HTTP PATCH habilitado",
+      "details": "Servidor responde a PATCH con código 200",
+      "recommendation": "Deshabilitar método PATCH si no es necesario"
+    },
+    {
+      "type": "dangerous_http_methods",
+      "severity": "medium",
+      "description": "Método HTTP OPTIONS habilitado",
+      "details": "Servidor responde a OPTIONS con código 200",
+      "recommendation": "Deshabilitar método OPTIONS si no es necesario"
+    },
+    {
+      "type": "missing_security_header",
+      "severity": "medium",
+      "description": "Header CSP faltante - sitio vulnerable a XSS",
+      "details": "Header 'content-security-policy' no encontrado",
+      "recommendation": "Implementar header content-security-policy"
+    },
+    {
+      "type": "missing_security_header",
+      "severity": "medium",
+      "description": "Header X-Frame-Options faltante - sitio vulnerable a clickjacking",
+      "details": "Header 'x-frame-options' no encontrado",
+      "recommendation": "Implementar header x-frame-options"
+    },
+    {
+      "type": "missing_security_header",
+      "severity": "low",
+      "description": "Header X-Content-Type-Options faltante - sitio vulnerable a MIME sniffing",
+      "details": "Header 'x-content-type-options' no encontrado",
+      "recommendation": "Implementar header x-content-type-options"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "path": "/api",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api/v1",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api/v2",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/rest",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/graphql",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/admin",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/admin/api",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/wp-json",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/wp-admin",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api/users",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api/auth",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api/login",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api/config",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/swagger",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/docs",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/api-docs",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/config",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/status",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/health",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    },
+    {
+      "path": "/debug",
+      "status": 301,
+      "server": "AmazonS3",
+      "size": 0,
+      "authentication": false,
+      "exposedData": []
+    }
+  ],
+  "recommendations": [
+    "🔒 Implementar HTTPS con certificados válidos",
+    "🛡️  Configurar headers de seguridad (HSTS, CSP, X-Frame-Options)",
+    "🔐 Implementar autenticación robusta para APIs y paneles admin",
+    "🚫 Ocultar información del servidor en headers HTTP",
+    "📋 Realizar auditorías de seguridad regulares",
+    "🔄 Mantener software y dependencias actualizadas",
+    "📊 Implementar logging y monitoreo de seguridad",
+    "🚪 Configurar firewall y limitación de rate limiting",
+    "Deshabilitar método PUT si no es necesario",
+    "Deshabilitar método DELETE si no es necesario",
+    "Deshabilitar método PATCH si no es necesario",
+    "Deshabilitar método OPTIONS si no es necesario",
+    "Implementar header strict-transport-security",
+    "Implementar header content-security-policy",
+    "Implementar header x-frame-options",
+    "Implementar header x-content-type-options"
+  ]
+}

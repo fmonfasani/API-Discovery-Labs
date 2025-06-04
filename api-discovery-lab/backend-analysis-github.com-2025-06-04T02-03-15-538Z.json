@@ -1,0 +1,1024 @@
+{
+  "serverInfo": {
+    "server": "github.com",
+    "poweredBy": "No identificado",
+    "statusCode": 200,
+    "contentType": "text/html; charset=utf-8",
+    "responseTime": 60
+  },
+  "vulnerabilities": [
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/rest",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/rest",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/graphql",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/graphql",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/health",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/health",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/ready",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/ready",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/live",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/live",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/ping",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/ping",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/heartbeat",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/heartbeat",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/metrics",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/metrics",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/prometheus",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/prometheus",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/stats",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/stats",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/performance",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/performance",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/monitoring",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/monitoring",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/dashboard",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/cluster-status",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/cluster-status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/swagger",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/swagger",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/docs",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/docs",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/api-docs",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/api-docs",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/openapi.json",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/schema",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/schema",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/about",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/about",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/registry",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/registry",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/gateway",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/gateway",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/proxy",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/proxy",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Information Disclosure",
+      "severity": "HIGH",
+      "endpoint": "/circuit-breaker",
+      "description": "Endpoint expone información sensible: IP Addresses",
+      "recommendation": "Revisar y filtrar datos sensibles antes de exponerlos"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/circuit-breaker",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/db-status",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/admin",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/debug",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/trace",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/profiler",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/config",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    },
+    {
+      "type": "Missing Authentication",
+      "severity": "MEDIUM",
+      "endpoint": "/settings",
+      "description": "Endpoint no requiere autenticación",
+      "recommendation": "Implementar autenticación apropiada"
+    }
+  ],
+  "apiEndpoints": [
+    {
+      "path": "/rest",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 173335,
+      "responseTime": 150,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/graphql",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 282969,
+      "responseTime": 353,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/health",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 182215,
+      "responseTime": 200,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/ready",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 267074,
+      "responseTime": 419,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/live",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 180651,
+      "responseTime": 131,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/status",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 46,
+      "responseTime": 7,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/ping",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 236430,
+      "responseTime": 114,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/heartbeat",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 225450,
+      "responseTime": 350,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/metrics",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 200771,
+      "responseTime": 224,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/prometheus",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 285520,
+      "responseTime": 257,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/stats",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 191599,
+      "responseTime": 159,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/performance",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 191002,
+      "responseTime": 204,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/monitoring",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 176071,
+      "responseTime": 207,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/dashboard",
+      "status": 302,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 0,
+      "responseTime": 24,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/cluster-status",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 174552,
+      "responseTime": 123,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/swagger",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 172710,
+      "responseTime": 204,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 221144,
+      "responseTime": 217,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/api-docs",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 151742,
+      "responseTime": 178,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/openapi.json",
+      "status": 410,
+      "server": "github.com",
+      "contentType": "application/json; charset=utf-8",
+      "size": 394,
+      "responseTime": 33,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/schema",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 172365,
+      "responseTime": 139,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 261066,
+      "responseTime": 96,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/registry",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 187152,
+      "responseTime": 185,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/gateway",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 186484,
+      "responseTime": 206,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/proxy",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 180396,
+      "responseTime": 159,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/circuit-breaker",
+      "status": 200,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 235979,
+      "responseTime": 104,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": [
+        "IP Addresses"
+      ]
+    },
+    {
+      "path": "/db-status",
+      "status": 429,
+      "server": "github.com",
+      "contentType": "text/html",
+      "size": 9372,
+      "responseTime": 30,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/admin",
+      "status": 429,
+      "server": "github.com",
+      "contentType": "text/html",
+      "size": 9372,
+      "responseTime": 33,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/debug",
+      "status": 429,
+      "server": "github.com",
+      "contentType": "text/html",
+      "size": 9372,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/trace",
+      "status": 429,
+      "server": "github.com",
+      "contentType": "text/html",
+      "size": 9372,
+      "responseTime": 29,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/profiler",
+      "status": 429,
+      "server": "github.com",
+      "contentType": "text/html",
+      "size": 9372,
+      "responseTime": 41,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/config",
+      "status": 429,
+      "server": "github.com",
+      "contentType": "text/html",
+      "size": 9372,
+      "responseTime": 31,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    },
+    {
+      "path": "/settings",
+      "status": 302,
+      "server": "github.com",
+      "contentType": "text/html; charset=utf-8",
+      "size": 0,
+      "responseTime": 19,
+      "authentication": {
+        "required": false,
+        "type": "No especificado",
+        "bearer": false
+      },
+      "exposedData": []
+    }
+  ],
+  "securityHeaders": {
+    "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+    "Content-Security-Policy": "default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/ productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/ productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/ productionresultssa5.blob.core.windows.net/ productionresultssa6.blob.core.windows.net/ productionresultssa7.blob.core.windows.net/ productionresultssa8.blob.core.windows.net/ productionresultssa9.blob.core.windows.net/ productionresultssa10.blob.core.windows.net/ productionresultssa11.blob.core.windows.net/ productionresultssa12.blob.core.windows.net/ productionresultssa13.blob.core.windows.net/ productionresultssa14.blob.core.windows.net/ productionresultssa15.blob.core.windows.net/ productionresultssa16.blob.core.windows.net/ productionresultssa17.blob.core.windows.net/ productionresultssa18.blob.core.windows.net/ productionresultssa19.blob.core.windows.net/ github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com github.githubassets.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com www.youtube-nocookie.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com release-assets.githubusercontent.com secured-user-images.githubusercontent.com/ user-images.githubusercontent.com/ private-user-images.githubusercontent.com opengraph.githubassets.com copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com objects-origin.githubusercontent.com *.githubusercontent.com images.ctfassets.net/8aevphvgewt8/; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com github.githubassets.com assets.ctfassets.net/8aevphvgewt8/ videos.ctfassets.net/8aevphvgewt8/; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/",
+    "X-Frame-Options": "deny",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+    "Permissions-Policy": "❌ Ausente"
+  },
+  "technologies": [
+    "React"
+  ],
+  "performance": {
+    "responseTimeStats": {
+      "average": 7.111111111111111,
+      "min": 6.666666666666667,
+      "max": 7.333333333333333,
+      "endpoints": {
+        "/health": {
+          "averageResponseTime": 7.333333333333333,
+          "measurements": [
+            8,
+            7,
+            7
+          ],
+          "consistency": 6.428243465332251
+        },
+        "/status": {
+          "averageResponseTime": 6.666666666666667,
+          "measurements": [
+            7,
+            7,
+            6
+          ],
+          "consistency": 7.0710678118654755
+        },
+        "/metrics": {
+          "averageResponseTime": 7.333333333333333,
+          "measurements": [
+            8,
+            7,
+            7
+          ],
+          "consistency": 6.428243465332251
+        },
+        "/api": {
+          "averageResponseTime": 7,
+          "measurements": [
+            7,
+            7,
+            7
+          ],
+          "consistency": 0
+        },
+        "/api/v1": {
+          "averageResponseTime": 7.333333333333333,
+          "measurements": [
+            7,
+            8,
+            7
+          ],
+          "consistency": 6.428243465332251
+        },
+        "/": {
+          "averageResponseTime": 7,
+          "measurements": [
+            7,
+            7,
+            7
+          ],
+          "consistency": 0
+        }
+      }
+    },
+    "throughputMetrics": {},
+    "databasePerformance": {},
+    "cachePerformance": {},
+    "loadBalancerHealth": {},
+    "/health": {
+      "cacheControl": "max-age=0, private, must-revalidate"
+    },
+    "/status": {
+      "cacheControl": "max-age=0, private, must-revalidate"
+    },
+    "/metrics": {
+      "cacheControl": "max-age=0, private, must-revalidate"
+    },
+    "/api": {
+      "cacheControl": "no-cache"
+    },
+    "/api/v1": {
+      "cacheControl": "no-cache"
+    },
+    "/": {
+      "cacheControl": "max-age=0, private, must-revalidate"
+    }
+  },
+  "architecture": {
+    "type": "microservices",
+    "apiVersioning": {
+      "documentation": {
+        "version": "1.1"
+      },
+      "strategies": {
+        "urlPath": [],
+        "queryParam": [],
+        "header": [],
+        "subdomain": []
+      },
+      "maturity": "advanced"
+    },
+    "rateLimiting": {},
+    "circuitBreaker": {},
+    "scalingIndicators": {},
+    "deploymentInfo": {},
+    "indicators": {
+      "microservices": 9,
+      "monolith": 0,
+      "serverless": 0
+    },
+    "microservicesPatterns": {
+      "serviceDiscovery": true,
+      "apiGateway": true,
+      "circuitBreaker": true,
+      "configServer": true,
+      "messageQueue": true
+    },
+    "microservicesMaturity": "advanced",
+    "hasDocumentation": true,
+    "documentationEndpoint": "/swagger",
+    "loadBalancing": {
+      "responseTimeVariation": {
+        "average": 7.2,
+        "range": 1,
+        "coefficientOfVariation": 5.555555555555555
+      }
+    }
+  },
+  "recommendations": [],
+  "riskLevel": "HIGH",
+  "performanceScore": 99.28888888888889,
+  "architectureScore": 80
+}
